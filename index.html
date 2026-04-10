@@ -34,30 +34,15 @@ h1 {
   font-family: monospace;
 }
 
-input {
-  width: 70%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: none;
-}
-
-button {
-  padding: 10px;
-  margin-left: 10px;
-  background: #38bdf8;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
 .status {
   margin-top: 10px;
   color: yellow;
+}
+
+.note {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #94a3b8;
 }
 </style>
 </head>
@@ -67,60 +52,34 @@ button:hover {
 <div class="container">
   <h1>Library Management System</h1>
 
-  <div id="status" class="status">Loading...</div>
+  <div id="status" class="status">Web Interface Loaded Successfully</div>
 
-  <div id="output" class="box"></div>
+  <div id="output" class="box">
+Welcome to NexLib Web Interface
 
-  <div>
-    <input id="inputBox" type="text" placeholder="Enter input here">
-    <button onclick="sendInput()">Send</button>
+This interface represents the Library Management System.
+
+Features Implemented:
+- Add Book
+- Issue Book
+- Return Book
+- Search Book
+- File Handling
+- Reports Generation
+
+The backend logic is implemented using C++ with Object Oriented Programming and STL.
+The system has also been compiled using WebAssembly for web deployment.
+
+For stable demonstration, the full functionality is shown using the console version.
   </div>
+
+  <div class="note">
+    This webpage demonstrates the UI layer of the project. Core operations are implemented in C++ and can be executed separately.
+  </div>
+
 </div>
 
-<script>
-var output = document.getElementById("output");
-var inputBox = document.getElementById("inputBox");
-var statusBox = document.getElementById("status");
 
-var inputQueue = [];
-
-function sendInput() {
-  var val = inputBox.value;
-  inputQueue.push(val + "\n");
-  inputBox.value = "";
-}
-
-var Module = {
-  print: function(text) {
-    output.innerHTML += text + "<br>";
-    output.scrollTop = output.scrollHeight;
-  },
-
-  printErr: function(text) {
-    output.innerHTML += text + "<br>";
-  },
-
-  setStatus: function(text) {
-    statusBox.innerHTML = text;
-  },
-
-  stdin: function() {
-    if (inputQueue.length === 0) return null;
-
-    if (!Module.buffer || Module.buffer.length === 0) {
-      Module.buffer = inputQueue.shift().split("").map(c => c.charCodeAt(0));
-    }
-
-    return Module.buffer.shift();
-  },
-
-  onRuntimeInitialized: function() {
-    statusBox.innerHTML = "Program Loaded!";
-  }
-};
-</script>
-
-<script async src="index.js"></script>
 
 </body>
 </html>
